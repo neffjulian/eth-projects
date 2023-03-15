@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# stops processing in case of failure
+set -euo pipefail
+
+# prints each line executed
+set -x
+
+pwd
+
+sudo nft delete rule inet filter input handle 5
+sudo nft add rule inet filter input position 15 tcp dport 5432 drop
+sudo nft add rule inet filter input position 15 ip saddr 129.132.121.162 tcp dport 5432 accept
+sudo cp -f c-company-app.conf /etc/nginx/sites-enabled/company-app.conf
+sudo systemctl restart nginx
+sudo mkdir -p /var/www/html/acme/.well-known/acme-challenge

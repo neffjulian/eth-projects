@@ -1,0 +1,13 @@
+- name: Install xfce4 desktop
+  apt:
+    name: "{{ xfce_packages }}"
+    state: present
+    update_cache: true
+  notify: Restart login manager service
+
+- name: Copy admin cert
+  copy:
+    src: /vagrant/ca/eca/certs/admin.p12
+    dest: /home/admin/admin.p12
+    owner: admin
+    mode: 0664

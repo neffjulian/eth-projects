@@ -1,0 +1,19 @@
+name: ml4h
+
+channels:
+- conda-forge
+- defaults
+
+dependencies:
+  - python=3.9
+  - pip
+  - nltk==3.7
+  - gensim==4.1.2
+  - scikit-learn==1.0.2
+  - seaborn==0.11.2
+  - ipykernel
+  - pip:
+    - pytorch-lightning==1.6.0
+    - pandas==1.4.2
+    - transformers==4.18.0
+    - lightning-flash==0.7.3

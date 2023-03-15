@@ -1,0 +1,9 @@
+---
+mysql_root_password: "{{ db_root_pass }}"
+mysql_databases:
+  - name: "{{ db_name }}"
+mysql_users:
+  - name: "{{ db_user }}"
+    host: "%"
+    password: "{{ db_pass }}"
+    priv: "*.*:ALL"

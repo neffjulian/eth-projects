@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block content %}
+
+<nav class="d-flex flex-row gap-2">
+  <a href="/logout">Logout</a>
+</nav>
+
+
+<p>Number of Certificates: {{ admin_info.certificates }}</p>
+<p>Number of Revoked Certificates: {{ admin_info.revocations }}</p>
+<p>Current Serial Number: {{ admin_info.serial_nr }}</p>
+{% endblock %}

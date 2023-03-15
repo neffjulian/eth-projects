@@ -1,0 +1,39 @@
+- name: Copy ca
+  copy:
+    src: /vagrant/ca
+    dest: /home/{{ username }}/
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0770
+
+- name: Install pip packages
+  pip:
+    requirements: /home/{{ username }}/ca/requirements.txt
+
+- name: Create caserver service
+  template:
+    src: caserver.service.j2
+    dest: /etc/systemd/system/caserver.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: create log file
+  file:
+    path: /home/{{ username }}/ca/ca-server.log
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: touch
+    attributes: +a
+    mode: u=rw
+  
+- name: Reload systemd
+  systemd: 
+    daemon_reload: yes
+
+- name: Start caserver service
+  systemd:
+    name: caserver
+    enabled: yes
+    state: started
+

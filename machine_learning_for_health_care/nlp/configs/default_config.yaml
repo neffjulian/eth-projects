@@ -1,0 +1,20 @@
+experiment_name: "default_config"
+
+# Model and dataset for experiment
+model: ""
+
+seed: 1234
+
+# Training parameters
+batch_size: 32
+n_epochs: 30
+early_stopping: true
+patience: 6
+train_val_split: 0.9
+
+# This parameters are passed to the model
+model_args:
+  lr: 0.001
+  num_classes: 5
+  optimizer: "adam"
+  criterion: "cross_entropy"

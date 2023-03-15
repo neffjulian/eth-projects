@@ -1,0 +1,41 @@
+---
+- name: Install mysql server
+  include_role: 
+    name: geerlingguy.mysql
+
+- name: Copy imovies dump
+  copy:
+    src: imovies_users.sql
+    dest: /var/tmp/imovies_users.sql
+
+- name: Import imovies dump
+  mysql_db:
+    name: imovies
+    state: import
+    target: /var/tmp/imovies_users.sql
+
+- name: Copy ca table
+  copy:
+    src: imovies_ca_tables.sql 
+    dest: /var/tmp/imovies_ca_tables.sql
+
+- name: Import ca table
+  mysql_db:
+    name: imovies
+    state: import
+    target: /var/tmp/imovies_ca_tables.sql
+
+
+
+- name: Enable TLS connection to mysql
+  lineinfile:
+    path: /etc/mysql/my.cnf
+    line: "{{ item }}"
+  with_items:
+    - 'ssl_ca=/etc/asl/certs/root_cert.pem'
+    - 'ssl_cert=/etc/asl/certs/db_cert.pem'
+    - 'ssl_key=/etc/asl/certs/db_key.pem'
+    - 'require_secure_transport=ON'
+  become: yes
+  notify:
+    - Restart mysql

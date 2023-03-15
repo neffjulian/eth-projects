@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: yes
+  roles:
+    - nftables
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: Remove synced vagrant folder
+      mount:
+        path: /vagrant
+        state: absent
+
+    - name: Kill processes of vagrant user
+      shell: "pkill -u vagrant"
+      ignore_errors: true
+
+    - name: Remove root password
+      shell: "passwd -d root"
+
+- hosts: all, !web
+  become: yes
+  tasks:
+    - name: Remove vagrant user
+      user:
+        name: vagrant
+        state: absent
+        remove: yes
+        force: yes

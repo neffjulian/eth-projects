@@ -1,0 +1,8 @@
+- hosts: webservers, caservers, dbservers, backupservers
+  become: yes
+  tasks:
+    - name: Add users
+      user:
+        name: "{{ username }}"
+        password_lock: yes
+        shell: "{{ usershell }}"

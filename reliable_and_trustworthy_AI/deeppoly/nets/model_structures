@@ -1,0 +1,181 @@
+# Net 1
+# torch.Size([1, 1, 28, 28]) Normalization()
+# torch.Size([1, 784]) Flatten(start_dim=1, end_dim=-1)
+# torch.Size([1, 50]) Linear(in_features=784, out_features=50, bias=True)
+# torch.Size([1, 50]) ReLU()
+# torch.Size([1, 10]) Linear(in_features=50, out_features=10, bias=True)
+
+# Net 2
+# torch.Size([1, 1, 28, 28]) Normalization()
+# torch.Size([1, 784]) Flatten(start_dim=1, end_dim=-1)
+# torch.Size([1, 100]) Linear(in_features=784, out_features=100, bias=True)
+# torch.Size([1, 100]) ReLU()
+# torch.Size([1, 50]) Linear(in_features=100, out_features=50, bias=True)
+# torch.Size([1, 50]) ReLU()
+# torch.Size([1, 10]) Linear(in_features=50, out_features=10, bias=True)
+
+# Net 3
+# torch.Size([1, 3, 32, 32]) Normalization()
+# torch.Size([1, 3072]) Flatten(start_dim=1, end_dim=-1)
+# torch.Size([1, 100]) Linear(in_features=3072, out_features=100, bias=True)
+# torch.Size([1, 100]) ReLU()
+# torch.Size([1, 100]) Linear(in_features=100, out_features=100, bias=True)
+# torch.Size([1, 100]) ReLU()
+# torch.Size([1, 10]) Linear(in_features=100, out_features=10, bias=True)
+
+# Net 4
+# torch.Size([1, 1, 28, 28]) Normalization()
+# torch.Size([1, 16, 14, 14]) Conv2d(1, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+# torch.Size([1, 16, 14, 14]) ReLU()
+# torch.Size([1, 3136]) Flatten(start_dim=1, end_dim=-1)
+# torch.Size([1, 100]) Linear(in_features=3136, out_features=100, bias=True)
+# torch.Size([1, 100]) ReLU()
+# torch.Size([1, 10]) Linear(in_features=100, out_features=10, bias=True)
+
+# Net 5
+# torch.Size([1, 1, 28, 28]) Normalization()
+# torch.Size([1, 16, 14, 14]) Conv2d(1, 16, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+# torch.Size([1, 16, 14, 14]) ReLU()
+# torch.Size([1, 32, 7, 7]) Conv2d(16, 32, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+# torch.Size([1, 32, 7, 7]) ReLU()
+# torch.Size([1, 1568]) Flatten(start_dim=1, end_dim=-1)
+# torch.Size([1, 100]) Linear(in_features=1568, out_features=100, bias=True)
+# torch.Size([1, 100]) ReLU()
+# torch.Size([1, 10]) Linear(in_features=100, out_features=10, bias=True)
+
+# Net 6
+# torch.Size([1, 3, 32, 32]) Normalization()
+# torch.Size([1, 16, 16, 16]) Conv2d(3, 16, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+# torch.Size([1, 16, 16, 16]) ReLU()
+# torch.Size([1, 32, 8, 8]) Conv2d(16, 32, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+# torch.Size([1, 32, 8, 8]) ReLU()
+# torch.Size([1, 2048]) Flatten(start_dim=1, end_dim=-1)
+# torch.Size([1, 100]) Linear(in_features=2048, out_features=100, bias=True)
+# torch.Size([1, 100]) ReLU()
+# torch.Size([1, 10]) Linear(in_features=100, out_features=10, bias=True)
+
+# Net 7
+# torch.Size([1, 1, 28, 28]) Normalization()
+# torch.Size([1, 16, 14, 14]) Conv2d(1, 16, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+# torch.Size([1, 16, 14, 14]) ReLU()
+# torch.Size([1, 64, 7, 7]) Conv2d(16, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+# torch.Size([1, 64, 7, 7]) ReLU()
+# torch.Size([1, 3136]) Flatten(start_dim=1, end_dim=-1)
+# torch.Size([1, 100]) Linear(in_features=3136, out_features=100, bias=True)
+# torch.Size([1, 100]) ReLU()
+# torch.Size([1, 100]) Linear(in_features=100, out_features=100, bias=True)
+# torch.Size([1, 100]) ReLU()
+# torch.Size([1, 10]) Linear(in_features=100, out_features=10, bias=True)
+
+# Net 8
+# [Conv2d(3, 8, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1)), ReLU(), Sequential(
+#   (0): BasicBlock(
+#     (path_a): Sequential(
+#       (0): Identity()
+#       (1): Conv2d(8, 16, kernel_size=(1, 1), stride=(2, 2))
+#     )
+#     (path_b): Sequential(
+#       (0): Conv2d(8, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+#       (1): ReLU()
+#       (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+#     )
+#   )
+#   (1): ReLU()
+#   (2): BasicBlock(
+#     (path_a): Sequential(
+#       (0): Identity()
+#     )
+#     (path_b): Sequential(
+#       (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+#       (1): ReLU()
+#       (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+#     )
+#   )
+#   (3): ReLU()
+# ), Flatten(start_dim=1, end_dim=-1), Linear(in_features=1024, out_features=100, bias=True), ReLU(), Linear(in_features=100, out_features=10, bias=True)]
+
+# Net 9
+# [Conv2d(3, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False), BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True), ReLU(), Sequential(
+#   (0): BasicBlock(
+#     (path_a): Sequential(
+#       (0): Identity()
+#       (1): Conv2d(16, 32, kernel_size=(1, 1), stride=(2, 2), bias=False)
+#       (2): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+#     )
+#     (path_b): Sequential(
+#       (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+#       (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+#       (2): ReLU()
+#       (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+#       (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+#     )
+#   )
+#   (1): ReLU()
+# ), Sequential(
+#   (0): BasicBlock(
+#     (path_a): Sequential(
+#       (0): Identity()
+#       (1): Conv2d(32, 64, kernel_size=(1, 1), stride=(2, 2), bias=False)
+#       (2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+#     )
+#     (path_b): Sequential(
+#       (0): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+#       (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+#       (2): ReLU()
+#       (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+#       (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+#     )
+#   )
+#   (1): ReLU()
+# ), Flatten(start_dim=1, end_dim=-1), Linear(in_features=1024, out_features=100, bias=True), ReLU(), Linear(in_features=100, out_features=10, bias=True)]
+
+# Net 10
+# [Conv2d(3, 8, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1)), ReLU(), Sequential(
+#   (0): BasicBlock(
+#     (path_a): Sequential(
+#       (0): Identity()
+#       (1): Conv2d(8, 16, kernel_size=(1, 1), stride=(2, 2))
+#     )
+#     (path_b): Sequential(
+#       (0): Conv2d(8, 16, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+#       (1): ReLU()
+#       (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+#     )
+#   )
+#   (1): ReLU()
+#   (2): BasicBlock(
+#     (path_a): Sequential(
+#       (0): Identity()
+#     )
+#     (path_b): Sequential(
+#       (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+#       (1): ReLU()
+#       (2): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+#     )
+#   )
+#   (3): ReLU()
+# ), Sequential(
+#   (0): BasicBlock(
+#     (path_a): Sequential(
+#       (0): Identity()
+#       (1): Conv2d(16, 32, kernel_size=(1, 1), stride=(2, 2))
+#     )
+#     (path_b): Sequential(
+#       (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+#       (1): ReLU()
+#       (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+#     )
+#   )
+#   (1): ReLU()
+#   (2): BasicBlock(
+#     (path_a): Sequential(
+#       (0): Identity()
+#     )
+#     (path_b): Sequential(
+#       (0): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+#       (1): ReLU()
+#       (2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+#     )
+#   )
+#   (3): ReLU()
+# ), Flatten(start_dim=1, end_dim=-1), Linear(in_features=512, out_features=100, bias=True), ReLU(), Linear(in_features=100, out_features=10, bias=True)]

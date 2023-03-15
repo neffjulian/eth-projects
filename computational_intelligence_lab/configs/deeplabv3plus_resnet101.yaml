@@ -1,0 +1,47 @@
+random_seed: 1234
+
+experiment_name: "deeplabv3plus_resnet101"
+
+train: True
+predict: True
+
+#resume_from_checkpoint: logs/cil2022_default/ycwf0jpw_21/checkpoints/epoch=118-step=2022.ckpt
+
+model:
+  type: segmentation_models_pytorch.DeepLabV3Plus
+  encoder_name: resnet101
+  encoder_weights: imagenet
+  in_channels: 3
+  classes: 1
+
+trainer:
+  type: pytorch_lightning.Trainer
+  max_epochs: 200
+  log_every_n_steps: 5
+  accelerator: gpu
+  devices: 1
+
+loss_fn:
+  type: segmentation_models_pytorch.losses.JaccardLoss
+  mode: binary
+  from_logits: True
+
+optimizer:
+  type: torch.optim.Adam
+  lr: 0.001
+
+scheduler:
+  type: torch.optim.lr_scheduler.ReduceLROnPlateau
+  mode: max
+  factor: 0.25
+  patience: 5
+  min_lr: 0.00001
+  verbose: True
+
+dataset:
+  batch_size: 8
+  val_split: 0.1
+  shuffle: True
+  num_workers: 4
+  massachusetts: False
+  augmentations: # use default

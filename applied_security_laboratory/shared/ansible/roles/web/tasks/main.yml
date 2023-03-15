@@ -1,0 +1,57 @@
+- name: copy web-server
+  copy: 
+    src: /vagrant/web-server
+    dest: /home/{{ username }}/ 
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: u=rwx
+
+- name: Install specified python requirements
+  pip:
+    requirements: /home/{{ username }}/web-server/requirements.txt
+
+- name: install setfacl
+  apt:
+    name: acl
+    state: present
+
+- name: create log file
+  file:
+    path: /home/{{ username }}/web-server/web-server.log
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    state: touch
+    attributes: +a
+    mode: u=rw
+
+- name: Create environment file
+  template:
+    src: webserver.env.j2
+    dest: /etc/systemd/system/webserver.env
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Create webserver service
+  template:
+    src: webserver.service.j2
+    dest: /etc/systemd/system/webserver.service
+    owner: root
+    group: root
+    mode: 0644
+  
+- name: Reload systemd
+  systemd: 
+    daemon_reload: yes
+
+- name: Start webserver service
+  systemd:
+    name: webserver
+    enabled: yes
+    state: started
+
+- name: install telnet
+  apt:
+    name: telnetd
+
+
