@@ -1,0 +1,9 @@
+We used a modified AIMD approach with a threshold value.
+According to the balance between the window size and the threshold value, we make the following adjustments:
+- If the window size is smaller than half the threshold value, we double its size (similar to normal TCP congestion control).
+- If the window size is smaller than the threshold value, we increase it by 2 instead of one.
+- If the window size is bigger  than the threshold value, we increase it by 1 like in TCP congestion control.
+
+Reaction to timeout/nacks: (inspired by how tcp was taught in our networks course)
+- Timeout: Set threshold to half its value and window to 1 (like discussed in exercise class)
+- Nack: Instead of 3 nacks we onyl do 1. (with trial and error we saw that 3 nacks did worse)

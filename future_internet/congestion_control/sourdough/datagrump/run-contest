@@ -1,0 +1,52 @@
+#!/usr/bin/perl -w
+
+use strict;
+use LWP::UserAgent;
+use HTTP::Request::Common;
+use File::Basename;
+use Cwd;
+
+my $tracefile = q{t0};
+my $visual = 1;
+my $output_location = q{/tmp/contest_uplink_log};
+
+my $receiver_pid = fork;
+if ( $receiver_pid < 0 ) {
+  die qq{$!};
+} elsif ( $receiver_pid == 0 ) {
+  # child
+  exec q{./receiver 9090} or die qq{$!};
+}
+
+chomp( my $dirname = dirname(Cwd::abs_path(__FILE__)));
+
+# run the sender inside a linkshell and a delayshell
+my @command = qw{mm-delay 20 mm-link UPLINK DOWNLINK};
+
+# display livegraphs if we seem to be running under X
+if ( $visual and defined $ENV{ 'DISPLAY' } ) {
+  push @command, qw{--meter-uplink --meter-uplink-delay};
+}
+
+push @command, split(' ', qq{--once --uplink-log=${output_location} -- bash -c});
+
+push @command, q{./sender $MAHIMAHI_BASE 9090};
+
+die unless $command[ 3 ] eq "UPLINK";
+$command[ 3 ] = qq{$dirname/traces/${tracefile}.down};
+
+die unless $command[ 4 ] eq "DOWNLINK";
+$command[ 4 ] = qq{$dirname/traces/${tracefile}.up};
+
+system @command;
+
+# kill the receiver
+kill 'INT', $receiver_pid;
+
+print "\n";
+
+# analyze performance locally
+system qq{mm-throughput-graph 500 ${output_location} > /tmp/hhlog}
+  and die q{mm-throughput-graph exited with error. NOT uploading};
+
+print "\n";
